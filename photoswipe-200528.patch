@@ -1,7 +1,7 @@
-diff --git js/photoswipe.jquery.js js/photoswipe.jquery.js
+diff --git a/js/photoswipe.jquery.js b/js/photoswipe.jquery.js
 index cdb4dff..0726579 100644
---- js/photoswipe.jquery.js
-+++ js/photoswipe.jquery.js
+--- a/js/photoswipe.jquery.js
++++ b/js/photoswipe.jquery.js
 @@ -14,17 +14,11 @@
      attach: function (context, settings) {
        this.photoSwipeOptions = settings.photoswipe ? settings.photoswipe.options : {};
