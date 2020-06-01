@@ -1,0 +1,61 @@
+diff --git js/photoswipe.jquery.js js/photoswipe.jquery.js
+index cdb4dff..0726579 100644
+--- js/photoswipe.jquery.js
++++ js/photoswipe.jquery.js
+@@ -14,17 +14,11 @@
+     attach: function (context, settings) {
+       this.photoSwipeOptions = settings.photoswipe ? settings.photoswipe.options : {};
+ 
+-      // First ensure all photoswipe photos are in a photoswipe-gallery wrapper:
+-      var $imagesWithoutGalleries = $('a.photoswipe', context).filter(function (elem) {
+-        return !$(this).parents('.photoswipe-gallery').length;
+-      });
+-      if ($imagesWithoutGalleries.length) {
+-        // We have no galleries just individual images.
+-        $imagesWithoutGalleries.each(function (index) {
+-          $imageLink = $(this);
+-          // Add the wrapper and indicate that it's an automatic fallback:
+-          $imageLink.wrap('<span class="photoswipe-gallery photoswipe-gallery--fallback-wrapper"></span>');
+-        });
++      // Wrap all photo gallery photos with a photoswipe-gallery wrapper
++      var $photoGallery = $('.photo-gallery__images', context);
++
++      if($photoGallery.parents('.photoswipe-gallery').length < 1) {
++        $photoGallery.wrap('<span class="photoswipe-gallery photoswipe-gallery--fallback-wrapper"></span>');
+       }
+ 
+       var $galleries = $('.photoswipe-gallery', context);
+@@ -96,7 +90,7 @@
+             src: $image.attr('href'),
+             w: size[0],
+             h: size[1],
+-            title: $image.data('overlay-title'),
++            title: $image.data('overlay-title').replace('Caption', ''),
+             msrc: $image.find('img').attr('src')
+           }
+         );
+@@ -122,7 +116,7 @@
+         return { x: tpos.left, y: tpos.top, w: tw };
+       }
+ 
+-      // Ensures we have items (.photoswipe element) before initializing 
++      // Ensures we have items (.photoswipe element) before initializing
+       // PhotoSwipe so to make PhotoSwipe get along with Blazy, Slick, etc.
+       if (items.length > 0) {
+         // Pass data to PhotoSwipe and initialize it
+@@ -139,7 +133,7 @@
+      */
+     parseHash: function () {
+       var hash = window.location.hash.substring(1),
+-        params = {};
++          params = {};
+ 
+       if (hash.length < 5) {
+         return params;
+@@ -169,4 +163,4 @@
+       return params;
+     }
+   };
+-})(jQuery, Drupal, PhotoSwipe, PhotoSwipeUI_Default);
++})(jQuery, Drupal, PhotoSwipe, PhotoSwipeUI_Default);
+\ No newline at end of file
